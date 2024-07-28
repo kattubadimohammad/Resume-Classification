@@ -1,0 +1,265 @@
+EDA:
+
+
+Here's an overview of the key steps and insights from the code:
+
+1. Importing Libraries
+Libraries such as os, spacy, docx2txt, numpy, pandas, seaborn, and matplotlib are imported for various tasks including data manipulation, text processing, and visualization.
+2. Dataset Overview
+The code explores the dataset to understand the distribution of resume files based on their formats (.doc, .docx, .pdf).
+Visualizations, such as bar charts and pie charts, are used to represent the distribution of file types.
+3. Extracting Resumes by Profile Category
+Resumes are categorized based on the profiles they belong to.
+Visualizations are used to show the number and percentage of profiles in the dataset.
+4. Reading a Resume File
+The docx2txt library is used to extract text from .docx files, and the function extract_text_from_docx demonstrates how to retrieve text from a sample resume.
+5. Data Exploration
+5.1 N-grams Analysis
+N-grams analysis is performed to understand which words often appear together in resumes. Unigrams (single words), bigrams (pairs of consecutive words), and trigrams (triplets of consecutive words) are explored.
+5.2 Top 20 Most Used Words
+The most frequently used words in resumes are identified using the CountVectorizer. The top 25 words are visualized using a bar plot.
+5.3 Word Clouds
+Word clouds are generated to visually represent the most common words in the entire dataset.
+Review Meeting Explanation:
+File Type Distribution:
+
+Discuss the distribution of file types and their percentages to understand the dataset's composition.
+Profile Category Distribution:
+
+Present the distribution of profiles in the dataset using visualizations.
+Highlight the most common profiles and their percentages.
+Text Extraction:
+
+Explain the process of extracting text from .docx files using the docx2txt library.
+Data Exploration Insights:
+
+Discuss the insights gained from N-grams analysis, including common word combinations.
+Present the top 20 most used words in resumes and discuss their relevance.
+Word Clouds:
+
+Showcase the word clouds as a visual representation of the most common words in resumes.
+Business Impact:
+
+Emphasize how the document classification solution aligns with the business objective of reducing manual effort in HRM.
+Discuss potential benefits, such as increased accuracy and automation.
+Next Steps:
+
+Propose potential next steps, such as model training for document classification or further analysis based on the insights gained.
+
+file_path: This is the path to the directory containing your datasets.
+
+doc_file, pdf_file, and docx_file: These lists are initialized to store the names of files with different extensions.
+
+folder_name: This list is used to store the corresponding folder names for each file.
+
+The outer loop iterates through each folder in the specified directory.
+
+The inner loop iterates through each file in the current folder.
+
+If a file has a '.doc' extension, its name is appended to the doc_file list, and the folder name is appended to the folder_name list. Similarly, for '.docx' and other file types.
+
+Note: It's good practice to use os.path.join() when constructing file paths to ensure compatibility across different operating systems.
+
+
+
+
+
+
+
+print('Number of .doc Files  = {}'.format(len(doc_file)), '\n'
+      'Number of .pdf Files  = {}'.format(len(pdf_file)), '\n'
+      'Number of .docx Files = {}'.format(len(docx_file)))
+
+This code prints the counts of files with different extensions.
+
+Explanation:
+
+len(doc_file): This gives the number of files with the '.doc' extension.
+len(pdf_file): This gives the number of files with the '.pdf' extension.
+len(docx_file): This gives the number of files with the '.docx' extension.
+The results are printed using the format() method to format the output.
+
+
+
+
+
+
+Explanation:
+
+fig, axe = plt.subplots(1, 1, figsize=(9, 6), dpi=100): Creates a figure and an axis for your plot.
+
+sns.barplot(): Plots a bar plot using Seaborn.
+
+axe.set_xlabel(), axe.set_ylabel(), plt.legend(), plt.title(): Set labels and title for the plot.
+
+for i in ax.containers: ax.bar_label(i, ...): Adds labels to the bars.
+
+os.makedirs('IMG', exist_ok=True): Creates the 'IMG' directory if it doesn't exist.
+
+pylab.rcParams.update(rcParams): Applies the custom rcParams.
+
+fig.tight_layout(): Adjusts the layout for better visualization.
+
+plt.show(): Displays the plot.
+
+fig.savefig('IMG\File_Type_Bar.png', dpi=500): Saves the figure as an image.
+
+Make sure you have the necessary libraries installed (matplotlib, seaborn, numpy, etc.) before running this code. If you have any specific questions or need further assistance, feel free to ask!
+
+
+
+
+file_path = r'datasets/'
+file_name = []
+profile = []
+
+for folder in os.listdir(file_path):
+    folder_path = os.path.join(file_path, folder)
+    for file in os.listdir(folder_path):
+        if file.endswith('.doc') or file.endswith('.docx'):
+            profile.append(folder)
+            file_name.append(file)
+
+Explanation:
+
+file_path: This is the path to the directory containing your datasets.
+
+file_name and profile: These lists are initialized to store the names of files and associated profiles.
+
+The outer loop iterates through each folder in the specified directory.
+
+The inner loop iterates through each file in the current folder.
+
+If a file has a '.doc' or '.docx' extension, its name is appended to the file_name list, and the associated profile name (from the outer loop) is appended to the profile list.
+
+Note: I simplified the conditions for checking file extensions using or, as both '.doc' and '.docx' will have the same profile information.
+
+
+
+
+resume_data = pd.DataFrame()
+resume_data['Profile'] = profile
+resume_data['Resumes'] = file_name
+
+Explanation:
+
+pd.DataFrame(): This initializes an empty DataFrame.
+
+resume_data['Profile'] = profile: This adds a column named 'Profile' to your DataFrame and populates it with the contents of the profile list.
+
+resume_data['Resumes'] = file_name: This adds a column named 'Resumes' to your DataFrame and populates it with the contents of the file_name list.
+
+Now, resume_data should contain two columns: 'Profile' and 'Resumes', with the associated profile information and file names.
+
+
+
+
+unique_profiles = resume_data['Profile'].value_counts().index
+
+Explanation:
+
+resume_data['Profile'].value_counts(): This returns a Series with the counts of each unique value in the 'Profile' column.
+
+.index: This retrieves the unique values (index) from the resulting Series.
+
+
+
+resume_data.Profile.value_counts()
+
+This will give you a pandas Series where the unique values in the 'Profile' column are the index, and the corresponding values are the counts.
+
+
+
+fig, axe = plt.subplots(1,1, figsize=(12,6), dpi=200)
+ax = sns.barplot(x=df_ngram['Unigram_Bigram'].head(25), y=df_ngram.Frequency.head(25), data=resume_data, ax = axe,
+            label='Total Pofile Category : {}'.format(len(resume_data.Category.unique())))
+
+axe.set_xlabel('Words', size=16,fontweight= 'bold')
+axe.set_ylabel('Frequency', size=16, fontweight= 'bold')
+plt.xticks(rotation = 90)
+plt.legend(loc='best', fontsize= 'x-large')
+plt.title('Top 25 Most used Words in Resumes', fontsize= 18, fontweight= 'bold')
+
+for i in ax.containers:
+    ax.bar_label(i,color = 'black', fontweight = 'bold', fontsize= 12)
+
+pylab.rcParams.update(rcParams)
+fig.tight_layout()
+plt.show()
+fig.savefig('Output Images/Top_Words_Bar', dpi = 500)
+
+Here's a brief explanation of what your code is doing:
+
+CountVectorizer Setup:
+
+python
+Copy code
+countvec = CountVectorizer(stop_words=stopwords.words('english'), ngram_range=(1,2))
+This initializes a CountVectorizer object with English stopwords and considers unigrams and bigrams.
+
+Transforming Text Data:
+
+python
+Copy code
+ngrams = countvec.fit_transform(resume_data['Resume_Details'])
+This transforms the 'Resume_Details' text data into a matrix of unigrams and bigrams.
+
+Counting Frequencies:
+
+python
+Copy code
+count_values = ngrams.toarray().sum(axis=0)
+This counts the frequency of each unigram and bigram across all documents.
+
+Creating DataFrame:
+
+python
+Copy code
+vocab = countvec.vocabulary_
+df_ngram = pd.DataFrame(sorted([(count_values[i], k) for k, i in vocab.items()], reverse=True))
+                     .rename(columns={0: 'Frequency', 1: 'Unigram_Bigram'})
+This creates a DataFrame with columns 'Frequency' and 'Unigram_Bigram', displaying the frequency and corresponding unigram or bigram.
+
+One thing to note is that the stopwords.words('english') may not be effective in removing all common English stopwords. It's good practice to check and potentially customize the list of stopwords based on your specific needs.
+
+If you have any specific questions or if there's anything else you'd like to do with the ngrams or the DataFrame, feel free to ask!
+
+
+
+
+fig, axe = plt.subplots(1,1, figsize=(12,6), dpi=200)
+ax = sns.barplot(x=df_ngram['Unigram_Bigram'].head(25), y=df_ngram.Frequency.head(25), data=resume_data, ax = axe,
+            label='Total Pofile Category : {}'.format(len(resume_data.Category.unique())))
+
+axe.set_xlabel('Words', size=16,fontweight= 'bold')
+axe.set_ylabel('Frequency', size=16, fontweight= 'bold')
+plt.xticks(rotation = 90)
+plt.legend(loc='best', fontsize= 'x-large')
+plt.title('Top 25 Most used Words in Resumes', fontsize= 18, fontweight= 'bold')
+
+for i in ax.containers:
+    ax.bar_label(i,color = 'black', fontweight = 'bold', fontsize= 12)
+
+pylab.rcParams.update(rcParams)
+fig.tight_layout()
+plt.show()
+fig.savefig('Output Images/Top_Words_Bar', dpi = 500)
+
+Your code seems to be generating a bar plot to visualize the top 25 most used unigrams and bigrams in the 'Resume_Details' column of your DataFrame. However, there is a small mistake in the code related to the usage of 'df_ngram' and 'resume_data' simultaneously. You should use 'df_ngram' for plotting since it contains the frequency information.
+
+
+
+text = " ".join(cat for cat in resume_data.Resume_Details) # Creating the text variable
+
+word_cloud = WordCloud(width=1000, height=800, random_state=10, background_color="black", 
+                       colormap="Pastel1", collocations=False, stopwords=STOPWORDS).generate(text)
+
+plt.figure(figsize=(10,8), dpi=500) # Display the generated Word Cloud
+plt.title('Most Common Words in Resumes', fontsize= 16, fontweight= 'bold')
+plt.imshow(word_cloud)
+plt.axis("off")
+
+word_cloud.to_file('Output Images/Word_Clowds.png')
+plt.show()
+
+It looks like you're creating a word cloud to visualize the most common words in the 'Resume_Details' column of your DataFrame. The code is generally correct. However, there is a small issue with the WordCloud import statement. Make sure to import WordCloud from the correct module.

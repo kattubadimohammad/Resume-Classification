@@ -1,0 +1,46 @@
+The provided code appears to be a comprehensive script for document classification, particularly focused on processing and analyzing resumes for different job categories. Let's break down the key components and steps:
+
+1. Importing Libraries
+The code starts by importing necessary libraries such as spacy, nltk, textract, pandas, and others. These libraries are essential for text processing, natural language processing, and data manipulation.
+
+2. Extracting Text from Dataset
+The code then extracts text data from a set of Word documents (docx files) in specified directories for different job categories (e.g., PeopleSoft, React JS Developer, SQL Developer, Workday). The text extraction is performed using the textract library.
+
+3. Creating a DataFrame
+The extracted text data is organized into a Pandas DataFrame named resume_data, including details such as the category and raw resume text.
+
+4. Data Understanding
+This section explores the characteristics of the dataset, including the number of words, characters, stopwords, and numerics in each resume. It provides insights into the basic statistics of the dataset.
+
+5. Text Pre-Processing
+The code preprocesses the raw resume text using regular expressions. The cleaning involves converting text to lowercase, removing HTML tags, URLs, numbers, and stopwords. The cleaned data is saved to a new CSV file.
+
+6. Named Entity Recognition (NER)
+The script performs Named Entity Recognition (NER) on the resume text to identify and extract entities such as names, organizations, and locations.
+
+7. Parts of Speech (POS) Tagging
+This section uses SpaCy for Part-of-Speech (POS) tagging to identify and categorize words as nouns and verbs. It also visualizes the most frequently used nouns and verbs in a bar chart and word cloud.
+
+Review Meeting Explanation
+A "review meeting" in the context of this script could involve presenting and discussing the results of the document classification process. The review might cover aspects such as:
+
+Data Exploration: A summary of the dataset, including the distribution of resumes across different job categories.
+
+Preprocessing: Discussion on how the text data was cleaned and processed to ensure quality and consistency.
+
+Analysis: Insights gained from the analysis of word counts, character counts, stopwords, and numeric values in the resumes.
+
+Named Entity Recognition (NER): Any notable entities identified in the resumes, which could be relevant for HRM purposes.
+
+Parts of Speech Analysis: Key findings from the analysis of nouns and verbs in the resumes, possibly highlighting skills or job-related terms.
+
+Visualizations: Presentation of visualizations, such as bar charts and word clouds, to illustrate the most frequently used words.
+
+Next Steps: Discussion on potential next steps, improvements, or additional analyses based on the findings.
+
+Overall, the review meeting would aim to provide stakeholders with a clear understanding of the document classification results and insights derived from the analysis, helping them make informed decisions or take further actions.
+
+
+
+
+
