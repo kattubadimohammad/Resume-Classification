@@ -40,7 +40,7 @@ Resumes are an ideal example of unstructured data. Since there is no widely acce
 ### All models above show the following train and test accuracy:
 
 <div align="center">
-    <img src="https://github.com/kattubadimohammad/Resume-Classification/blob/main/demo/MK%20Profile.png" width="800" />
+    <img src="https://github.com/kattubadimohammad/Resume-Classification/blob/main/Output%20Images/Mod_Acc_Bar.png" width="800" />
 </div>
 
 
