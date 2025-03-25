@@ -44,6 +44,10 @@ Resumes are an ideal example of unstructured data. Since there is no widely acce
 </div>
 
 
+🚀 Deployment
+
+You can check out the deployed application - [here](https://resume-classification-nb1d.onrender.com/).
+
 ## ✍️ Author
 - [Mohammad Kattubadi](https://github.com/kattubadimohammad)
 
