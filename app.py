@@ -8,12 +8,17 @@ import streamlit as st
 import en_core_web_sm
 import pickle as pk
 import nltk
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, wordnet
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
 import warnings
 
-# Ensure Stopwords are available
+# Ensure WordNet and Stopwords are available
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
+
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
