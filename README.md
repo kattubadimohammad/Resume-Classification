@@ -1,6 +1,12 @@
 # Project-Resume-Classification
 ### Problem Statement & Business Objectives: The document classification solution should significantly reduce the manual human effort in the HRM. It should achieve a higher level of accuracy and automation with minimal human intervention.
 
+
+🚀 Deployment
+
+You can check out the deployed application - [here](https://resume-classification-nb1d.onrender.com/).
+
+
 ##
 <div align="center">
     <img src="https://user-images.githubusercontent.com/109328924/228459849-80366524-ea13-43df-ab89-672f183f00a5.jpg" width="700" />
@@ -43,10 +49,6 @@ Resumes are an ideal example of unstructured data. Since there is no widely acce
     <img src="https://github.com/kattubadimohammad/Resume-Classification/blob/main/Output%20Images/Mod_Acc_Bar.png" width="800" />
 </div>
 
-
-🚀 Deployment
-
-You can check out the deployed application - [here](https://resume-classification-nb1d.onrender.com/).
 
 ## ✍️ Author
 - [Mohammad Kattubadi](https://github.com/kattubadimohammad)
